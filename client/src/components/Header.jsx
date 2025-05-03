@@ -8,7 +8,7 @@ export default function Dashboard() {
       <nav className="navbar navbar-expand-lg">
         <div className="container-fluid">
           <NavLink className="navbar-brand bg-transparent" to="/">
-            Ticket<span className="text-color">Sold</span>
+            Book<span className="text-color">Event</span>
           </NavLink>
           <button
             className="navbar-toggler"
@@ -30,7 +30,7 @@ export default function Dashboard() {
                   aria-current="page"
                   to="/"
                 >
-                  Dashboard
+                  Home
                 </NavLink>
               </li>
               <li className="nav-item">
