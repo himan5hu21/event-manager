@@ -90,6 +90,12 @@ body {
   background-color: #cbcbcb39;
 }
 
+.carousel-width {
+  height: 450px;
+  width: 100%;
+  object-fit: cover;
+}
+
 @media only screen and (max-width: 1024px) {
   .card-box {
     width: 75%;
@@ -99,5 +105,9 @@ body {
 @media only screen and (max-width: 600px) {
   .card-box {
     width: 90%;
+  }
+
+  .carousel-width {
+    height: 225px;
   }
 }
