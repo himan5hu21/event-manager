@@ -1,7 +1,27 @@
+import axios from "axios";
 import React from "react";
-import { NavLink, Outlet } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, Outlet, useNavigate } from "react-router";
+import { logout } from "../store/auth/authSlice";
 
 export default function Dashboard() {
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  console.log(user);
+
+  const onClickLogout = async () => {
+    const response = await axios.post("/api/auth/logout");
+    if (response.data.success) {
+      dispatch(logout());
+      console.log("Logout successful");
+    }
+  };
+
+  const onClickLogin = () => {
+    navigate("/login");
+  };
+
   return (
     <div>
       {/* Navbar */}
@@ -37,9 +57,9 @@ export default function Dashboard() {
                 <NavLink
                   className={`nav-link ${({ isActive }) =>
                     isActive && "active"}`}
-                  to="/tickets"
+                  to="/events"
                 >
-                  Tickets
+                  Events
                 </NavLink>
               </li>
               <li className="nav-item">
@@ -53,9 +73,23 @@ export default function Dashboard() {
               </li>
             </ul>
 
-            <button type="button" className="btn btn-warning">
-              Logout
-            </button>
+            {user ? (
+              <button
+                type="button"
+                className="btn btn-log"
+                onClick={onClickLogout}
+              >
+                Logout
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="btn btn-log"
+                onClick={onClickLogin}
+              >
+                Login
+              </button>
+            )}
           </div>
         </div>
       </nav>

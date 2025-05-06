@@ -7,6 +7,7 @@ import { Route, Routes } from "react-router";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
+import Events from "./pages/Events";
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/tickets" element={<h1>Tickets</h1>} />
+        <Route path="/events" element={<Events />} />
         <Route path="/features" element={<h1>features</h1>} />
       </Route>
     </Routes>
