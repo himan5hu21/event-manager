@@ -1,77 +1,126 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Carousel from "../components/Carousel";
 import EventGridCard from "../components/EventGridCard";
+import axios from "axios";
 
 export default function Home() {
-  const cardData = [
-    {
-      title: "Card title",
-      description:
-        "This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-      src: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZXZlbnR8ZW58MHx8MHx8fDA%3D",
-    },
-    {
-      title: "Card title",
-      description: "This is a short card.",
-      src: "https://images.unsplash.com/photo-1531058020387-3be344556be6?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZXZlbnR8ZW58MHx8MHx8fDA%3D",
-    },
-    {
-      title: "Card title",
-      description:
-        "This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-      src: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8ZXZlbnR8ZW58MHx8MHx8fDA%3D",
-    },
-    {
-      title: "Card title",
-      description:
-        "This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
-      src: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZXZlbnR8ZW58MHx8MHx8fDA%3D",
-    },
-  ];
+  const [tech, setTech] = useState([]);
+  const [cultural, setCultural] = useState([]);
+  const [comedy, setComedy] = useState([]);
+  const [workshop, setWorkshop] = useState([]);
+  const [exhibition, setExhibition] = useState([]);
+  const [sport, setSport] = useState([]);
+  const [festival, setFestival] = useState([]);
+
+  useEffect(() => {
+    const fetchEvents = async (categoryName) => {
+      try {
+        const res = await axios.get(`/api/events/byCategory/${categoryName}`);
+        return res.data.events;
+      } catch (err) {
+        console.error(`Failed to fetch ${categoryName} events`, err);
+        return [];
+      }
+    };
+
+    const fetchData = async () => {
+      const [
+        techEvents,
+        culturalEvents,
+        comedyEvents,
+        workshopEvents,
+        exhibitionEvents,
+        sportEvents,
+        festivalEvents,
+      ] = await Promise.all([
+        fetchEvents("tech"),
+        fetchEvents("cultural"),
+        fetchEvents("comedy"),
+        fetchEvents("workshop"),
+        fetchEvents("exhibition"),
+        fetchEvents("sport"),
+        fetchEvents("festival"),
+      ]);
+
+      setTech(techEvents);
+      setCultural(culturalEvents);
+      setComedy(comedyEvents);
+      setWorkshop(workshopEvents);
+      setExhibition(exhibitionEvents);
+      setSport(sportEvents);
+      setFestival(festivalEvents);
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <div>
       <Carousel />
       <div className="mx-5">
         <h1 className="mt-5 mb-3 text-center text-color">Tech Event</h1>
-        <EventGridCard cardData={cardData} />
+        {tech.length > 0 ? <EventGridCard cardData={tech} /> : <NoEvents />}
       </div>
 
       <div className="mx-5">
         <h1 className="mt-5 mb-3 text-center text-color">Cultural Event</h1>
-        <EventGridCard cardData={cardData} />
+        {cultural.length > 0 ? (
+          <EventGridCard cardData={cultural} />
+        ) : (
+          <NoEvents />
+        )}
       </div>
 
       <div className="mx-5">
         <h1 className="mt-5 mb-3 text-center text-color">
           Comedy & Entertainment Event
         </h1>
-        <EventGridCard cardData={cardData} />
+        {comedy.length > 0 ? <EventGridCard cardData={comedy} /> : <NoEvents />}
       </div>
 
       <div className="mx-5">
         <h1 className="mt-5 mb-3 text-center text-color">
           Workshop & Seminars Event
         </h1>
-        <EventGridCard cardData={cardData} />
+        {workshop.length > 0 ? (
+          <EventGridCard cardData={workshop} />
+        ) : (
+          <NoEvents />
+        )}
       </div>
 
       <div className="mx-5">
         <h1 className="mt-5 mb-3 text-center text-color">
           Exhibitions & Displays Event
         </h1>
-        <EventGridCard cardData={cardData} />
+        {exhibition.length > 0 ? (
+          <EventGridCard cardData={exhibition} />
+        ) : (
+          <NoEvents />
+        )}
       </div>
 
       <div className="mx-5">
         <h1 className="mt-5 mb-3 text-center text-color">Sport Event</h1>
-        <EventGridCard cardData={cardData} />
+        {sport.length > 0 ? <EventGridCard cardData={sport} /> : <NoEvents />}
       </div>
 
       <div className="mx-5">
         <h1 className="mt-5 mb-3 text-center text-color">Festival Event</h1>
-        <EventGridCard cardData={cardData} />
+        {festival.length > 0 ? (
+          <EventGridCard cardData={festival} />
+        ) : (
+          <NoEvents />
+        )}
       </div>
     </div>
   );
 }
+
+const NoEvents = () => {
+  return (
+    <div className="mx-5">
+      <h1 className="mt-5 mb-3 text-center fs-3">No Events</h1>
+    </div>
+  );
+};

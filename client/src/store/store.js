@@ -1,4 +1,5 @@
 import authReducer from "./auth/authSlice";
+import eventReducer from "./event/eventSlice";
 import storage from "redux-persist/lib/storage";
 import {
   FLUSH,
@@ -15,11 +16,12 @@ import persistStore from "redux-persist/es/persistStore";
 const persistConfig = {
   key: "root",
   storage,
-  // whitelist: ["auth"],
+  whitelist: ["auth"],
 };
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  events: eventReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

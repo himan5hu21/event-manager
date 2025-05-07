@@ -8,6 +8,7 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
 import Events from "./pages/Events";
+import SingleEvent from "./pages/SingleEvent";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         <Route path="/events" element={<Events />} />
+        <Route path="/events/:id" element={<SingleEvent />} />
         <Route path="/features" element={<h1>features</h1>} />
       </Route>
     </Routes>

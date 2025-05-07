@@ -1,14 +1,13 @@
 import axios from "axios";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, Outlet, useNavigate } from "react-router";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { logout } from "../store/auth/authSlice";
 
 export default function Dashboard() {
   const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log(user);
 
   const onClickLogout = async () => {
     const response = await axios.post("/api/auth/logout");

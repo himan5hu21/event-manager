@@ -37,6 +37,12 @@ export default function Carousel() {
               className="d-block w-100"
               alt="..."
             />
+            <div className="carousel-caption d-md-block bg-black bg-opacity-50 text-white p-3 rounded">
+              <h5>First slide label</h5>
+              <p>
+                Some representative placeholder content for the first slide.
+              </p>
+            </div>
           </div>
           <div className="carousel-item">
             <img
@@ -44,6 +50,12 @@ export default function Carousel() {
               className="d-block w-100"
               alt="..."
             />
+            <div className="carousel-caption d-md-block bg-black bg-opacity-50 text-white p-3 rounded">
+              <h5>Second slide label</h5>
+              <p>
+                Some representative placeholder content for the first slide.
+              </p>
+            </div>
           </div>
           <div className="carousel-item">
             <img
@@ -51,6 +63,12 @@ export default function Carousel() {
               className="d-block w-100"
               alt="..."
             />
+            <div className="carousel-caption d-md-block bg-black bg-opacity-50 text-white p-3 rounded">
+              <h5>Third slide label</h5>
+              <p>
+                Some representative placeholder content for the first slide.
+              </p>
+            </div>
           </div>
         </div>
         <button

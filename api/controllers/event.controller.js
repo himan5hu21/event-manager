@@ -120,3 +120,35 @@ export const deleteEventController = async (req, res, next) => {
     next(error);
   }
 };
+
+export const searchEventController = async (req, res, next) => {
+  const { query } = req.query;
+  try {
+    const events = await Event.find({
+      $or: [
+        { title: { $regex: query, $options: "i" } },
+        { category: { $regex: query, $options: "i" } },
+        { description: { $regex: query, $options: "i" } },
+        { location: { $regex: query, $options: "i" } },
+      ],
+    });
+
+    res.status(200).json({ success: true, events });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getEventByCategoryNameController = async (req, res, next) => {
+  const { categoryName } = req.params;
+
+  try {
+    const events = await Event.find({
+      category: { $regex: categoryName, $options: "i" },
+    }).limit(4);
+
+    res.status(200).json({ success: true, events });
+  } catch (error) {
+    next(error);
+  }
+};

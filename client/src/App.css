@@ -104,6 +104,13 @@ body {
   object-fit: cover;
 }
 
+.carousel-caption {
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent dark background */
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
 .btn-search {
   border: 1px solid #4f46e5;
   color: #4f46e5;
@@ -114,6 +121,10 @@ body {
 .btn-search:hover {
   background-color: #4f46e5;
   color: white;
+}
+
+.input-search {
+  width: 50%;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -129,5 +140,9 @@ body {
 
   .carousel-width {
     height: 225px;
+  }
+
+  .input-search {
+    width: 100%;
   }
 }
